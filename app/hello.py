@@ -1,17 +1,41 @@
 from flask import Flask, make_response, redirect, abort, render_template
-from flask import make_response
+from flask.ext.wtf import Form
+from wtforms import StringField, SubmitField, PasswordField
+from wtforms.validators import Required
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'hard to guess string'
+#
+#@app.route('/index')
+#def index():
+#    return render_template('index.html')
+#
+#@app.route('/user/<name>')
+#def user(name):
+#    return render_template('user.html',
+#                           user=user)
 
-@app.route('/index')
+class NameForm(Form):
+    user = StringField('What is your name?', validators=[Required()])
+    submit = SubmitField('Submit')
+
+
+#@app.route('/index')
+#def index():
+#     user = {'nickname':'jane'}
+#     return render_template('index.html',
+#                           user=user)
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
-
-@app.route('/user/<name>')
-def user(name):
-    return render_template('user.html',
-                           name=name)
-
+    user = None
+    form = NameForm()
+    if form.validate_on_submit():
+        name = form.user.data
+        form.user.data = ''
+        return render_template('index.html',
+                               form=form,
+                               user=user)
 
 ##response
 #@app.route('/')
@@ -33,6 +57,7 @@ def user(name):
 #    if not user:
 #        abort(404)
 #        return '<h1>Hello, %s</h1>' % user.name
+
 
 if __name__ == '__main__':
     app.run(debug=True)

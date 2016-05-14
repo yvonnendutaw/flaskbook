@@ -1,1 +1,7 @@
-<h1>Hello World!</h1>
+{% extends "base.html" %} {% block title %}Index{% endblock %} {% block head %} {{ super() }} {% endblock %} {% block body %} {% if user %}
+<h1>Hello, {{ user.nickname }}!</h1> {% else %}
+<h1>Hello, Stranger! </h1>
+<form method="POST">
+    {{ form.user.label }} {{ form.user(id='my-text-field') }} {{ form.submit() }}
+</form>
+{% endif %}{% endblock %}

@@ -1,0 +1,19 @@
+<html>
+
+<head>
+    {% block head %}
+    <title>{% block title %}{% endblock %} - My Application</title>
+    {% endblock %}
+    <link rel="stylesheet" href="../static/main.css">
+</head>
+
+<body>
+    <nav>
+        <li>home</li>
+        <li>user</li>
+        <li>about</li>
+    </nav>
+    {% block body %} {% endblock %}
+</body>
+
+</html>
