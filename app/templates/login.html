@@ -6,7 +6,9 @@
 
 <body>
     <form action="" method="post">
-        {{ form.email }} {{ form.password }} {{ form.csrf_token }}
+        {{ form.email.label }}: {{ form.email(placeholder='yourname@email.com') }}
+        <br> {{ form.password.label }}: {{ form.password }}
+        <br> {{ form.csrf_token }}
     </form>
 </body>
 
