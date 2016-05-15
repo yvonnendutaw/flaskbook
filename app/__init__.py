@@ -12,3 +12,13 @@ app.config.from_pyfile('config.py')
 # Variables defined here will override those in the default configuration
 app.config.from_envvar('APP_CONFIG_FILE')
 app.config.from_object('config')
+
+#calls list converter in util.py
+
+from flask import Flask
+
+app = Flask(__name__)
+
+from .util import ListConverter
+
+app.url_map.converters['list'] = ListConverter
